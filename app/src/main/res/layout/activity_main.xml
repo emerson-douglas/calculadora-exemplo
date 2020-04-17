@@ -85,7 +85,7 @@
         <TextView
             android:id="@+id/labelresult"
             android:layout_width="match_parent"
-            android:layout_height="126dp"
+            android:layout_height="wrap_content"
             android:textSize="28sp" />
 
     </LinearLayout>
