@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     boolean txtisnull(EditText edtxt1, EditText edtxt2){
         String txt1 = edtxt1.getText().toString();
         String txt2 = edtxt2.getText().toString();
@@ -99,22 +102,22 @@ public class MainActivity extends AppCompatActivity {
         //*****
         if(operacao=="soma") {
             float result = num1 + num2;
-            resultado.setText(Float.toString(num1) + " + " + Float.toString(num2) + " = " + Float.toString(result));
+            resultado.setText(num1 + " + " + num2 + " = " + result);
             Toast.makeText(getApplicationContext(), "soma", Toast.LENGTH_SHORT).show();
         }
         if(operacao=="sub") {
             float result = num1 - num2;
-            resultado.setText(Float.toString(num1) + " - " + Float.toString(num2) + " = " + Float.toString(result));
+            resultado.setText(num1 + " - " + num2 + " = " + result);
             Toast.makeText(getApplicationContext(), "subtração", Toast.LENGTH_SHORT).show();
         }
         if(operacao=="div") {
             float result = num1 / num2;
-            resultado.setText(Float.toString(num1) + " / " + Float.toString(num2) + " = " + Float.toString(result));
+            resultado.setText(num1 + " / " + num2 + " = " + result);
             Toast.makeText(getApplicationContext(), "divisão", Toast.LENGTH_SHORT).show();
         }
         if(operacao=="mult") {
             float result = num1 * num2;
-            resultado.setText(Float.toString(num1) + " * " + Float.toString(num2) + " = " + Float.toString(result));
+            resultado.setText(num1 + " * " + num2 + " = " + result);
             Toast.makeText(getApplicationContext(), "multiplicação", Toast.LENGTH_SHORT).show();
         }
     }
