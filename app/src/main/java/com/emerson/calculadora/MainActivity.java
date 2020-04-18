@@ -1,10 +1,13 @@
 package com.emerson.calculadora;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,25 +41,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String stredtxt1 = edtxt1.getText().toString();
                 String stredtxt2 = edtxt2.getText().toString();
-
-                if(TextUtils.isEmpty(stredtxt1) && TextUtils.isEmpty(stredtxt2)) {
-                    edtxt1.setError("preencha esse campo");
-                    edtxt2.setError("preencha esse campo");
-                    return;
+                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                if (check==true) {
+                    float num1 = Float.parseFloat(stredtxt1);
+                    float num2 = Float.parseFloat(stredtxt2);
+                    float result = num1 + num2;
+                    lresult.setText(Float.toString(num1) + " + " + Float.toString(num2) + " = " + Float.toString(result));
+                    Toast.makeText(getApplicationContext(), "soma", Toast.LENGTH_SHORT).show();
                 }
-                if(TextUtils.isEmpty(stredtxt1)) {
-                    edtxt1.setError("preencha esse campo");
-                    return;
-                }
-                if(TextUtils.isEmpty(stredtxt2)) {
-                    edtxt2.setError("preencha esse campo");
-                    return;
-                }
-                float num1 = Float.parseFloat(stredtxt1);
-                float num2 = Float.parseFloat(stredtxt2);
-                float result = num1 + num2;
-                lresult.setText(Float.toString(num1)+" + "+Float.toString(num2)+" = "+Float.toString(result));
-                Toast.makeText(getApplicationContext(),"soma", Toast.LENGTH_SHORT).show();
             }
         });
         btnsub.setOnClickListener(new View.OnClickListener() {
@@ -64,51 +56,30 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String stredtxt1 = edtxt1.getText().toString();
                 String stredtxt2 = edtxt2.getText().toString();
-
-                if(TextUtils.isEmpty(stredtxt1) && TextUtils.isEmpty(stredtxt2)) {
-                    edtxt1.setError("preencha esse campo");
-                    edtxt2.setError("preencha esse campo");
-                    return;
+                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                if (check==true) {
+                    float num1 = Float.parseFloat(stredtxt1);
+                    float num2 = Float.parseFloat(stredtxt2);
+                    float result = num1 - num2;
+                    lresult.setText(Float.toString(num1) + " - " + Float.toString(num2) + " = " + Float.toString(result));
+                    Toast.makeText(getApplicationContext(), "subtração", Toast.LENGTH_SHORT).show();
                 }
-                if(TextUtils.isEmpty(stredtxt1)) {
-                    edtxt1.setError("preencha esse campo");
-                    return;
-                }
-                if(TextUtils.isEmpty(stredtxt2)) {
-                    edtxt2.setError("preencha esse campo");
-                    return;
-                }
-                float num1 = Float.parseFloat(stredtxt1);
-                float num2 = Float.parseFloat(stredtxt2);
-                float result = num1 - num2;
-                lresult.setText(Float.toString(num1)+" - "+Float.toString(num2)+" = "+Float.toString(result));
-                Toast.makeText(getApplicationContext(),"subtração", Toast.LENGTH_SHORT).show();
             }
         });
         btndiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stredtxt1 = edtxt1.getText().toString();
-                String stredtxt2 = edtxt2.getText().toString();
+                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                if (check==true) {
+                    String stredtxt1 = edtxt1.getText().toString();
+                    String stredtxt2 = edtxt2.getText().toString();
 
-                if(TextUtils.isEmpty(stredtxt1) && TextUtils.isEmpty(stredtxt2)) {
-                    edtxt1.setError("preencha esse campo");
-                    edtxt2.setError("preencha esse campo");
-                    return;
+                    float num1 = Float.parseFloat(stredtxt1);
+                    float num2 = Float.parseFloat(stredtxt2);
+                    float result = num1 / num2;
+                    lresult.setText(Float.toString(num1) + " / " + Float.toString(num2) + " = " + Float.toString(result));
+                    Toast.makeText(getApplicationContext(), "divisão", Toast.LENGTH_SHORT).show();
                 }
-                if(TextUtils.isEmpty(stredtxt1)) {
-                    edtxt1.setError("preencha esse campo");
-                    return;
-                }
-                if(TextUtils.isEmpty(stredtxt2)) {
-                    edtxt2.setError("preencha esse campo");
-                    return;
-                }
-                float num1 = Float.parseFloat(stredtxt1);
-                float num2 = Float.parseFloat(stredtxt2);
-                float result = num1 / num2;
-                lresult.setText(Float.toString(num1)+" / "+Float.toString(num2)+" = "+Float.toString(result));
-                Toast.makeText(getApplicationContext(),"divisão", Toast.LENGTH_SHORT).show();
             }
         });
         btnmult.setOnClickListener(new View.OnClickListener() {
@@ -116,26 +87,34 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String stredtxt1 = edtxt1.getText().toString();
                 String stredtxt2 = edtxt2.getText().toString();
-
-                if(TextUtils.isEmpty(stredtxt1) && TextUtils.isEmpty(stredtxt2)) {
-                    edtxt1.setError("preencha esse campo");
-                    edtxt2.setError("preencha esse campo");
-                    return;
+                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                if (check==true) {
+                    float num1 = Float.parseFloat(stredtxt1);
+                    float num2 = Float.parseFloat(stredtxt2);
+                    float result = num1 * num2;
+                    lresult.setText(Float.toString(num1) + " * " + Float.toString(num2) + " = " + Float.toString(result));
+                    Toast.makeText(getApplicationContext(), "multiplicação", Toast.LENGTH_SHORT).show();
                 }
-                if(TextUtils.isEmpty(stredtxt1)) {
-                    edtxt1.setError("preencha esse campo");
-                    return;
-                }
-                if(TextUtils.isEmpty(stredtxt2)) {
-                    edtxt2.setError("preencha esse campo");
-                    return;
-                }
-                float num1 = Float.parseFloat(stredtxt1);
-                float num2 = Float.parseFloat(stredtxt2);
-                float result = num1 * num2;
-                lresult.setText(Float.toString(num1)+" * "+Float.toString(num2)+" = "+Float.toString(result));
-                Toast.makeText(getApplicationContext(),"multiplicação", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    boolean txtisnull(View v, EditText edtxt1, EditText edtxt2){
+        String txt1 = edtxt1.getText().toString();
+        String txt2 = edtxt2.getText().toString();
+
+        if(TextUtils.isEmpty(txt1) && TextUtils.isEmpty(txt2)) {
+            edtxt1.setError("preencha esse campo");
+            edtxt2.setError("preencha esse campo");
+            return false;
+        }
+        if(TextUtils.isEmpty(txt1)) {
+            edtxt1.setError("preencha esse campo");
+            return false;
+        }
+        if(TextUtils.isEmpty(txt2)) {
+            edtxt2.setError("preencha esse campo");
+            return false;
+        }else{return true;}
+
     }
 }
