@@ -59,27 +59,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    boolean txtisnull(EditText edtxt1, EditText edtxt2){
+    boolean txtisnull(EditText edtxt1, EditText edtxt2, TextView resultado){
+        resultado.setText("");
         String txt1 = edtxt1.getText().toString();
         String txt2 = edtxt2.getText().toString();
 
         if(TextUtils.isEmpty(txt1) && TextUtils.isEmpty(txt2)) {
             edtxt1.setError("preencha esse campo");
             edtxt2.setError("preencha esse campo");
-            return false;
+            return true;
         }
         if(TextUtils.isEmpty(txt1)) {
             edtxt1.setError("preencha esse campo");
-            return false;
+            return true;
         }
         if(TextUtils.isEmpty(txt2)) {
             edtxt2.setError("preencha esse campo");
-            return false;
-        }else{return true;}
-
+            return true;
+        }else{return false;}
     }
     void calcula(EditText edtxt1, EditText edtxt2,String operacao, TextView resultado){
-        if(!txtisnull(edtxt1,edtxt2)){return;}
+        if(txtisnull(edtxt1,edtxt2,resultado)){return;}
         String txt1 = edtxt1.getText().toString();
         String txt2 = edtxt2.getText().toString();
         //*****converte em float
