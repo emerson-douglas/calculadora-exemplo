@@ -1,19 +1,14 @@
 package com.emerson.calculadora;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.emerson.calculadora.R;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -21,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //***** vars ******
+        //***** ******
         final EditText edtxt1 = findViewById (R.id.num1);
         final EditText edtxt2 = findViewById (R.id.num2);
         final Button btnsoma = findViewById (R.id.somabtn);
@@ -31,74 +26,52 @@ public class MainActivity extends AppCompatActivity {
         final TextView lresult = findViewById (R.id.labelresult);
         //*****
 
-        //***** clear edit texts
+        //***** limpa os EditTexts
         edtxt1.setText("");
         edtxt2.setText("");
         //*****
-        //***** events
+        //***** eventos
         btnsoma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String stredtxt1 = edtxt1.getText().toString();
                 String stredtxt2 = edtxt2.getText().toString();
-                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                boolean check=txtisnull(edtxt1,edtxt2);
                 if (check==true) {
-                    float num1 = Float.parseFloat(stredtxt1);
-                    float num2 = Float.parseFloat(stredtxt2);
-                    float result = num1 + num2;
-                    lresult.setText(Float.toString(num1) + " + " + Float.toString(num2) + " = " + Float.toString(result));
-                    Toast.makeText(getApplicationContext(), "soma", Toast.LENGTH_SHORT).show();
+                    calcula(edtxt1,edtxt2,"soma",lresult);
                 }
             }
         });
         btnsub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stredtxt1 = edtxt1.getText().toString();
-                String stredtxt2 = edtxt2.getText().toString();
-                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                boolean check=txtisnull(edtxt1,edtxt2);
                 if (check==true) {
-                    float num1 = Float.parseFloat(stredtxt1);
-                    float num2 = Float.parseFloat(stredtxt2);
-                    float result = num1 - num2;
-                    lresult.setText(Float.toString(num1) + " - " + Float.toString(num2) + " = " + Float.toString(result));
-                    Toast.makeText(getApplicationContext(), "subtração", Toast.LENGTH_SHORT).show();
+                    calcula(edtxt1,edtxt2,"sub",lresult);
                 }
             }
         });
         btndiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean check=txtisnull(v ,edtxt1,edtxt2);
+                boolean check=txtisnull(edtxt1,edtxt2);
                 if (check==true) {
-                    String stredtxt1 = edtxt1.getText().toString();
-                    String stredtxt2 = edtxt2.getText().toString();
-
-                    float num1 = Float.parseFloat(stredtxt1);
-                    float num2 = Float.parseFloat(stredtxt2);
-                    float result = num1 / num2;
-                    lresult.setText(Float.toString(num1) + " / " + Float.toString(num2) + " = " + Float.toString(result));
-                    Toast.makeText(getApplicationContext(), "divisão", Toast.LENGTH_SHORT).show();
+                    calcula(edtxt1,edtxt2,"div",lresult);
                 }
             }
         });
         btnmult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stredtxt1 = edtxt1.getText().toString();
-                String stredtxt2 = edtxt2.getText().toString();
-                boolean check=txtisnull(v ,edtxt1,edtxt2);
+
+                boolean check=txtisnull(edtxt1,edtxt2);
                 if (check==true) {
-                    float num1 = Float.parseFloat(stredtxt1);
-                    float num2 = Float.parseFloat(stredtxt2);
-                    float result = num1 * num2;
-                    lresult.setText(Float.toString(num1) + " * " + Float.toString(num2) + " = " + Float.toString(result));
-                    Toast.makeText(getApplicationContext(), "multiplicação", Toast.LENGTH_SHORT).show();
+                    calcula(edtxt1,edtxt2,"mult",lresult);
                 }
             }
         });
     }
-    boolean txtisnull(View v, EditText edtxt1, EditText edtxt2){
+    boolean txtisnull(EditText edtxt1, EditText edtxt2){
         String txt1 = edtxt1.getText().toString();
         String txt2 = edtxt2.getText().toString();
 
@@ -117,4 +90,33 @@ public class MainActivity extends AppCompatActivity {
         }else{return true;}
 
     }
+    void calcula(EditText edtxt1, EditText edtxt2,String operacao, TextView resultado){
+        String txt1 = edtxt1.getText().toString();
+        String txt2 = edtxt2.getText().toString();
+        //*****converte em float
+        float num1 = Float.parseFloat(txt1);
+        float num2 = Float.parseFloat(txt2);
+        //*****
+        if(operacao=="soma") {
+            float result = num1 + num2;
+            resultado.setText(Float.toString(num1) + " + " + Float.toString(num2) + " = " + Float.toString(result));
+            Toast.makeText(getApplicationContext(), "soma", Toast.LENGTH_SHORT).show();
+        }
+        if(operacao=="sub") {
+            float result = num1 - num2;
+            resultado.setText(Float.toString(num1) + " - " + Float.toString(num2) + " = " + Float.toString(result));
+            Toast.makeText(getApplicationContext(), "subtração", Toast.LENGTH_SHORT).show();
+        }
+        if(operacao=="div") {
+            float result = num1 / num2;
+            resultado.setText(Float.toString(num1) + " / " + Float.toString(num2) + " = " + Float.toString(result));
+            Toast.makeText(getApplicationContext(), "divisão", Toast.LENGTH_SHORT).show();
+        }
+        if(operacao=="mult") {
+            float result = num1 * num2;
+            resultado.setText(Float.toString(num1) + " * " + Float.toString(num2) + " = " + Float.toString(result));
+            Toast.makeText(getApplicationContext(), "multiplicação", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
