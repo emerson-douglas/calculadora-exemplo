@@ -1,5 +1,5 @@
 # calculadora-exemplo
-exemplo de calculadora em android
+exemplo de calculadora Android
 
 # dicionario:
 
