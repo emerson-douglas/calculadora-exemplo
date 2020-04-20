@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnsub;
     private Button btndiv;
     private Button btnmult;
+    private Button btnlimpar;
     private TextView lresult;
     private TextView lhistorico;
 
@@ -39,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
         btnsub = findViewById (R.id.subbtn);
         btndiv = findViewById (R.id.divbtn);
         btnmult = findViewById (R.id.multbtn);
+        btnlimpar = findViewById(R.id.btnlimpa);
         lresult = findViewById (R.id.labelresult);
         lhistorico = findViewById(R.id.listhist);
+
+        lhistorico.setMovementMethod(new ScrollingMovementMethod());
         //*****
 
         //***** limpa os EditTexts
-        edtxt1.setText("");
-        edtxt2.setText("");
+        limpar();
         //*****
         //***** eventos
         btnsoma.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calcula("mult");
+            }
+        });
+        btnlimpar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpar();
             }
         });
     }
@@ -135,7 +144,12 @@ public class MainActivity extends AppCompatActivity {
     }
     void Historico(String txtresultado){
         lhistorico.append(txtresultado);
-        lhistorico.setMovementMethod(new ScrollingMovementMethod());
 
+    }
+    void limpar(){
+        lhistorico.setText("");
+        lresult.setText("");
+        edtxt1.setText("");
+        edtxt2.setText("");
     }
 }
