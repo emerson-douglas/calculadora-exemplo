@@ -4,26 +4,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
+    private EditText edtxt1;
+    private EditText edtxt2;
+    private Button btnsoma;
+    private Button btnsub;
+    private Button btndiv;
+    private Button btnmult;
+    private TextView lresult;
+    private TextView lhistorico;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //***** ******
-        final EditText edtxt1 = findViewById (R.id.num1);
-        final EditText edtxt2 = findViewById (R.id.num2);
-        final Button btnsoma = findViewById (R.id.somabtn);
-        final Button btnsub = findViewById (R.id.subbtn);
-        final Button btndiv = findViewById (R.id.divbtn);
-        final Button btnmult = findViewById (R.id.multbtn);
-        final TextView lresult = findViewById (R.id.labelresult);
+        edtxt1 = findViewById (R.id.num1);
+        edtxt2 = findViewById (R.id.num2);
+        btnsoma = findViewById (R.id.somabtn);
+        btnsub = findViewById (R.id.subbtn);
+        btndiv = findViewById (R.id.divbtn);
+        btnmult = findViewById (R.id.multbtn);
+        lresult = findViewById (R.id.labelresult);
+        lhistorico = findViewById(R.id.listhist);
         //*****
 
         //***** limpa os EditTexts
@@ -34,25 +51,25 @@ public class MainActivity extends AppCompatActivity {
         btnsoma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    calcula(edtxt1,edtxt2,"soma",lresult);
+                    calcula("soma");
             }
         });
         btnsub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calcula(edtxt1,edtxt2,"sub",lresult);
+                calcula("sub");
             }
         });
         btndiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calcula(edtxt1,edtxt2,"div",lresult);
+                calcula("div");
             }
         });
         btnmult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calcula(edtxt1,edtxt2,"mult",lresult);
+                calcula("mult");
             }
         });
     }
@@ -78,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }else{return false;}
     }
-    void calcula(EditText edtxt1, EditText edtxt2,String operacao, TextView resultado){
-        if(txtisnull(edtxt1,edtxt2,resultado)){return;}
+    void calcula(String operacao){
+        if(txtisnull(edtxt1,edtxt2,lresult)){return;}
         String txt1 = edtxt1.getText().toString();
         String txt2 = edtxt2.getText().toString();
         //*****converte em float
@@ -88,23 +105,37 @@ public class MainActivity extends AppCompatActivity {
         //*****
         if (operacao == "soma") {
             float result = num1 + num2;
-            resultado.setText(num1 + " + " + num2 + " = " + result);
+            String txtresultado=num1 + " + " + num2 + " = " + result+"\n";
+            lresult.setText(txtresultado);
+            Historico(txtresultado);
             Toast.makeText(getApplicationContext(), "soma", Toast.LENGTH_SHORT).show();
         }
         if (operacao == "sub") {
             float result = num1 - num2;
-            resultado.setText(num1 + " - " + num2 + " = " + result);
+            String txtresultado=num1 + " - " + num2 + " = " + result+"\n";
+            lresult.setText(txtresultado);
+            Historico(txtresultado);
             Toast.makeText(getApplicationContext(), "subtração", Toast.LENGTH_SHORT).show();
         }
         if (operacao == "div") {
             float result = num1 / num2;
-            resultado.setText(num1 + " / " + num2 + " = " + result);
+            String txtresultado=num1 + " / " + num2 + " = " + result+"\n";
+            lresult.setText(txtresultado);
+            Historico(txtresultado);
+
             Toast.makeText(getApplicationContext(), "divisão", Toast.LENGTH_SHORT).show();
         }
         if (operacao == "mult") {
             float result = num1 * num2;
-            resultado.setText(num1 + " * " + num2 + " = " + result);
+            String txtresultado=num1 + " * " + num2 + " = " + result+"\n";
+            lresult.setText(txtresultado);
+            Historico(txtresultado);
             Toast.makeText(getApplicationContext(), "multiplicação", Toast.LENGTH_SHORT).show();
         }
+    }
+    void Historico(String txtresultado){
+        lhistorico.append(txtresultado);
+        lhistorico.setMovementMethod(new ScrollingMovementMethod());
+
     }
 }
