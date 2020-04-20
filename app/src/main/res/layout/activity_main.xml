@@ -93,8 +93,16 @@
         <TextView
             android:id="@+id/listhist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HISTORICO:\n[\n]" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnlimpa"
+        android:layout_width="85dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="16dp"
+        android:text="Limpar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
